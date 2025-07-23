@@ -1,8 +1,8 @@
-"Mannequins for Sale":
-  author: "ManaUser"
-  category: "Decor"
-  description: |-
-    Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
-    I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
-    Visit the shop in Caldera to get started. Now with wigs!
-  url: "http://hostx.me/morrowind/#mannequins"
+Decor:
+  "Mannequins for Sale":
+    author: "ManaUser"
+    description: |-
+      Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
+      I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
+      Visit the shop in Caldera to get started. Now with wigs!
+    url: "http://hostx.me/morrowind/#mannequins"
