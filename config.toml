@@ -1,0 +1,52 @@
+theme = "daisy"
+
+# The URL the site will be built for
+base_url = "https://github.io/dreamweave-mp/dreamweave-web/"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+generate_feeds = true
+
+taxonomies = [
+    { name = "tags", paginate_by = 2, feed = true },
+    { name = "mod categories", paginate_by = 8, feed = true },
+]
+
+[search]
+# only this format is supported by the theme
+index_format = "elasticlunr_json"
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+[extra]
+# Put all your custom variables here
+daisyui_theme_light = "lofi"
+daisyui_theme_dark = "dracula"
+enable_theme_switching = true
+
+[extra.navbar]
+links = [
+    { url = "blog", i18n_key = "posts" },
+    { url = "tags", i18n_key = "tags" },
+    { url = "tools", i18n_key = "tools" },
+    { url = "categories", i18n_key = "categories" },
+    { url = "modlists", i18n_key = "modlists" },
+    { url = "mods", i18n_key = "mods" },
+]
+
+[extra.social]
+gitlab = "https://gitlab.com/magicaldave1"
+github = "https://github.com/DreamWeave-MP"
+
+[extra.footer]
+links = [
+    { url = "about", i18n_key = "about" },
+    { url = "https://github.com/DreamWeave-MP", i18n_key = "dw-home", no_translation = true },
+]
