@@ -1,29 +1,11 @@
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hash = window.location.hash;
-    if (hash) {
-        const card = document.getElementById(hash.substring(1));
-        if (card) card.querySelector('.hidden')?.classList.remove('hidden');
-    }
-});
-</script>
-<div class="card bg-base-200"
-    style="transition: background-color 0.5s ease;"
-    onmouseover="this.style.backgroundColor='var(--color-base-300)'"
-    onmouseout="this.style.backgroundColor='var(--color-base-200)'"
+<div class="card bg-base-200 scenarioCard"
+    onmouseover="setCardColor(this, '--color-base-300')"
+    onmouseout="setCardColor(this, '--color-base-200')"
     id="{{ title | slugify }}">
     <div
         class="card-body cursor-pointer"
-        onclick="
-        const content = this.nextElementSibling;
-        const isOpening = content.classList.toggle('hidden'); 
-        const slug = '#{{ title | slugify }}';
-        if (!isOpening) {
-            window.history.pushState(null, '', slug);
-        } else if (window.location.hash === slug) {
-            window.history.pushState(null, '', ' ');
-        }
-        ">
+        onclick="scenarioCardToggleVisibilityAndUpdateURL(this)"
+        >
         <div class="scenario-label-container">
             <span class="scenario-label badge badge-outline badge-primary badge-md">
                 {{ label | default(value="Scenario") }}
@@ -35,13 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </span>
         </div>
     </div>
-    <div class="hidden p-4 prose">
+    <div class="hidden p-4">
         {{ body | markdown | trim | safe -}}
             {% if steps %}
-                <pre style="background: var(--color-accent-content); text-wrap: auto;"><code>
-                    <ol class="list-none pl-3 text-sm" style="list-style-type: circle;">
+                <pre class="codeBlock"><code>
+                    <ol class="list-none pl-3 text-sm">
                         {% for step in steps -%}
-                            <li class="test-class-item">{{ step | markdown(inline=true) | trim | safe }}</li>
+                            <li>{{ step | markdown(inline=true) | trim | safe }}</li>
                         {% endfor -%}
                     </ol>
                 </code></pre>
