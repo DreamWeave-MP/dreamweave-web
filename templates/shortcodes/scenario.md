@@ -17,9 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         onclick="
         const content = this.nextElementSibling;
         const isOpening = content.classList.toggle('hidden'); 
+        const slug = '#{{ title | slugify }}';
         if (!isOpening) {
-            window.history.pushState(null, '', '#{{ title | slugify }}');
-        } else if (window.location.hash === '#{{ title | slugify }}') {
+            window.history.pushState(null, '', slug);
+        } else if (window.location.hash === slug) {
             window.history.pushState(null, '', ' ');
         }
         ">
