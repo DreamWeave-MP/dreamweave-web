@@ -13,7 +13,7 @@ VFSTool can help you diagnose issues in your modlist! It's also able to help you
     steps=[
         'vfstool "C:\Users\MyUserName\Documents\My Games\openmw\openmw.cfg" collapse -s ./my_merged_folder',
         'cd my_merged_folder',
-        'tes3cmd dump --type NPC --match "Caius Cosades" *.[eE][sS][mpMP]'
+        'tes3cmd dump --type NPC --match "Caius Cosades" *.\[eE\]\[sS\]\[mpMP\]'
     ]
 ) %}
 To do this, you must collapse all of your Data Directories into a single folder.
