@@ -7,13 +7,13 @@
         onclick="scenarioCardToggleVisibilityAndUpdateURL(this)"
         >
         <div class="scenario-label-container">
-            <span class="scenario-label badge badge-outline badge-primary badge-md">
-                {{ label | default(value="Scenario") }}
-            </span>
-            <span class="scenario-label badge badge-outline badge-secondary badge-xl">
-                <div class="card-title">
+            <span class="scenario-label badge badge-outline badge-secondary">
+                <div class="card-title text-xl">
                     {{ title }}
                 </div>
+            </span>
+            <span class="scenario-label badge badge-outline badge-primary">
+                {{ label | default(value="Scenario") }}
             </span>
         </div>
     </div>
