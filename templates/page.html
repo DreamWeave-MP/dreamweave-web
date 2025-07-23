@@ -1,0 +1,7 @@
+{% extends "daisy/templates/page.html" %}
+
+{% block extra_headers %}
+    {{ super() }}
+
+    <link rel="stylesheet" href="{{ get_url(path='css/custom.css') }}">
+{% endblock %}
