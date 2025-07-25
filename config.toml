@@ -12,8 +12,8 @@ build_search_index = false
 generate_feeds = true
 
 taxonomies = [
-    { name = "tags", paginate_by = 2, feed = true },
-    { name = "mod categories", paginate_by = 8, feed = true },
+    { name = "tags", paginate_by = 4, feed = true },
+    { name = "category", paginate_by = 8, feed = true },
 ]
 
 [search]
@@ -36,7 +36,7 @@ links = [
     { url = "blog", i18n_key = "posts" },
     { url = "tags", i18n_key = "tags" },
     { url = "tools", i18n_key = "tools" },
-    { url = "categories", i18n_key = "categories" },
+    { url = "category", i18n_key = "categories" },
     { url = "modlists", i18n_key = "modlists" },
     { url = "mods", i18n_key = "mods" },
 ]
