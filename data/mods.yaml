@@ -1,8 +1,57 @@
 Decor:
-  "Mannequins for Sale":
-    author: "ManaUser"
+  Mannequins for Sale:
+    author: ManaUser
     description: |-
       Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
       I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
       Visit the shop in Caldera to get started. Now with wigs!
-    url: "http://hostx.me/morrowind/#mannequins"
+    url: http://hostx.me/morrowind/#mannequins
+    configurations:
+      provides:
+        directories:
+          - .
+        content_files:
+          - Mannequins Resource.esp
+          - Mannequins for Sale.esp
+
+      sw0rdsinger:
+        directories:
+          - .
+        content_files:
+          - Mannequins Resource.esp
+          - Mannequins for Sale.esp
+
+Total Conversions:
+  Arktwend - OpenMW port:
+    url: https://www.nexusmods.com/morrowind/mods/45611
+    author: "SureAI"
+    description: |-
+      Port of the English version of the Arktwend total conversion to OpenMW.
+    configurations:
+      provides:
+        content_files:
+          - Arktwend_English.esm
+          - Arktwent_Fixes.esp
+          - TAO.esp
+        directories:
+          - Arktwend/Data Files
+          - Arktwend_Fixes/Data Files
+          - TAO
+  Arktwend English Cutscenes:
+    url: https://www.nexusmods.com/morrowind/mods/33639
+    author: Brumbek
+    description: |-
+      English versions of the two cutscenes for Arktwend (with subtitles)
+    configurations:
+      provides:
+        directories:
+          - .
+  Arktwend Enhanced Textures:
+    url: https://www.nexusmods.com/morrowind/mods/54859
+    author: Lasergunner255
+    description: |-
+      A Complete upscaled Texture pack for Arktwend encompassing every texture added or modified by arktwend during the installation.
+    configurations:
+      provides:
+        directories:
+          - Arktwend Enhanced Textures
