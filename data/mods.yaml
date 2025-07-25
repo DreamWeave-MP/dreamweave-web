@@ -15,11 +15,7 @@ Decor:
           - Mannequins for Sale.esp
 
       sw0rdsinger:
-        directories:
-          - .
-        content_files:
-          - Mannequins Resource.esp
-          - Mannequins for Sale.esp
+        use_default: true
 
 Total Conversions:
   Arktwend - OpenMW port:

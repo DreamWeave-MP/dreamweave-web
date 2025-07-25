@@ -122,17 +122,29 @@
                           "Windows"
                         ]
                       }
+                    },
+                    "use_default": {
+                      "const": "true"
                     }
                   },
                   "oneOf": [
                     {
-                      "required": [
-                        "directories"
+                      "anyOf": [
+                        {
+                          "required": [
+                            "directories"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "config"
+                          ]
+                        }
                       ]
                     },
                     {
                       "required": [
-                        "config"
+                        "use_default"
                       ]
                     }
                   ]
@@ -140,7 +152,19 @@
               },
               "required": [
                 "provides"
-              ]
+              ],
+              "dependencies": {
+                "use_default": {
+                  "properties": {
+                    "config": {
+                      "maxItems": 0
+                    },
+                    "settings": {
+                      "maxItems": 0
+                    }
+                  }
+                }
+              }
             }
           },
           "required": [
