@@ -14,7 +14,3 @@ For first-time installers, you can get all these tools out of the [Sixth House M
 For updaters, grab them directly from the [latest DW-tools release](https://github.com/DreamWeave-MP/DW-tools/releases/latest).  
 
 Please be sure to replace or overwrite any existing files when updating DW-Tools!
-
-## Test
-
-## Troubleshooting
