@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Mod Database",
+  "type": "object",
+  "propertyNames": {
+    "enum": [
+      "Decor",
+      "Total Conversions"
+    ]
+  },
+  "patternProperties": {
+    "^[a-zA-Z0-9;:\\-_ ]+$": {
+      "type": "object",
+      "title": "Mod",
+      "description": "Comprehensive definition of how a given mod interacts with the engine. It encompasses everything *except* sequencing, as this is meant to occur on a list-specific basis and/or be handled by LOOT.",
+      "patternProperties": {
+        "^[a-zA-Z0-9;:\\-_ ]+$": {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string",
+              "description": "Individual or team responsible for making this mod"
+            },
+            "description": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "version": {
+              "type": "string"
+            },
+            "configurations": {
+              "type": "object",
+              "description": "Map of modlist names to configurations associated with the mod. The minimum requirement is either a single data directory, or a config directory, but this also includes content files and adjustments to settings.cfg",
+              "propertyNames": {
+                "enum": [
+                  "iHeartVanilla",
+                  "sw0rdsinger",
+                  "provides"
+                ]
+              },
+              "patternProperties": {
+                "^[a-zA-Z0-9;:\\-_ ]+$": {
+                  "type": "object",
+                  "description": "Modlist-specfic configurations for this mod. The `provides` modlist is a special value which is only displayed on the mod's specific page. It refers to all configurations that may be provided by a mod, and may or may not even contain sane values.",
+                  "properties": {
+                    "additionalProperties": false,
+                    "config": {
+                      "type": "array",
+                      "description": "Relative path to a configuration directory provided by this mod",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "content_files": {
+                      "type": "array",
+                      "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files.",
+                      "items": {
+                        "type": "string",
+                        "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                        "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                      }
+                    },
+                    "directories": {
+                      "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod.",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    },
+                    "fallbacks": {
+                      "type": "object",
+                      "description": "Set of openmw.cfg edits made by a given mod, such as changing UI colors or font. No validation is provided for these fields!"
+                    },
+                    "groundcover": {
+                      "type": "array",
+                      "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
+                      "items": {
+                        "type": "string",
+                        "pattern": "\\.(esp|esm|omwaddon)$",
+                        "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon"
+                      }
+                    },
+                    "settings": {
+                      "type": "object",
+                      "description": "Alterations to settings.cfg provided by a given mod.",
+                      "propertyNames": {
+                        "enum": [
+                          "Camera",
+                          "Cells",
+                          "Fog",
+                          "Groundcover",
+                          "Input",
+                          "Map",
+                          "GUI",
+                          "HUD",
+                          "Game",
+                          "General",
+                          "Lua",
+                          "Models",
+                          "Navigator",
+                          "Physics",
+                          "Post Processing",
+                          "Saves",
+                          "Shaders",
+                          "Shadows",
+                          "Sound",
+                          "Stereo",
+                          "Stereo View",
+                          "Terrain",
+                          "Video",
+                          "Water",
+                          "Windows"
+                        ]
+                      }
+                    }
+                  },
+                  "oneOf": [
+                    {
+                      "required": [
+                        "directories"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "config"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "provides"
+              ]
+            }
+          },
+          "required": [
+            "author",
+            "description",
+            "url"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -4,5 +4,8 @@
       "allowed_elements": [ "div", "span", "code", "pre", "ol", "li" ]
     },
     "MD041": false
+  },
+  "yaml.schemas": {
+    "schemas/mods.schema.json": "data/mods.yaml"
   }
 }
