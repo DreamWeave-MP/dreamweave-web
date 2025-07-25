@@ -1,0 +1,22 @@
+{% extends "daisy/templates/page.html" %}
+
+{% block extra_headers %}
+    {{ super() }}
+
+    <link rel="stylesheet" href="{{ get_url(path='css/custom.css') }}">
+    <script src="{{ get_url(path='js/common.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="flex flex-col gap-3 w-full">
+  <!-- Title Badge -->
+  <span class="badge badge-xl badge-soft badge-secondary text-xl" style="width: 50vw;">
+    {{ page.title }}
+  </span>
+
+  <!-- Category Badge -->
+  <span class="badge badge-xl badge-soft badge-primary text-xl" style="width: 50vw;">
+    {{ page.taxonomies.category[0] }}
+  </span>
+</div>
+{% endblock %}
