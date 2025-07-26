@@ -5,6 +5,7 @@
   "propertyNames": {
     "enum": [
       "Decor",
+      "Music",
       "Total Conversions"
     ]
   },
@@ -40,7 +41,7 @@
             },
             "configurations": {
               "type": "object",
-              "description": "Map of modlist names to configurations associated with the mod. The minimum requirement is either a single data directory, or a config directory, but this also includes content files and adjustments to settings.cfg, and even additional configuration directories. The special `provides` list indicates all possible configurations a mod provides and isn't necessarily sane.",
+              "description": "Map of modlist names to configurations associated with the mod. The minimum requirement is either a single data directory, or a config directory, but this also includes content files, groundcover entries, and adjustments to openmw.cfg (fallback=) and settings.cfg. The special `provides` list indicates all possible configurations a mod provides and isn't necessarily sane.",
               "propertyNames": {
                 "enum": [
                   "iHeartVanilla",
@@ -92,43 +93,9 @@
                             "type": "string"
                           }
                         },
-                        "content_files": {
-                          "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
-                          "type": "array",
-                          "items": {
-                            "oneOf": [
-                              {
-                                "type": "string",
-                                "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
-                                "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
-                              },
-                              {
-                                "type": "object",
-                                "patternProperties": {
-                                  "^.*$": {
-                                    "type": "object",
-                                    "properties": {
-                                      "depends": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string",
-                                          "description": "In the same sequence as defined in the plugin's TES3 header, each field of this array defines a content file that this one depends upon.",
-                                          "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
-                                          "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
-                                        }
-                                      }
-                                    },
-                                    "additionalProperties": false
-                                  }
-                                },
-                                "maxProperties": 1
-                              }
-                            ]
-                          }
-                        },
                         "directories": {
                           "type": "array",
-                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
+                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod. Additionally, by using an object instead of a string, dependences for specific data directories may be defined. Content files and groundcover entries are also children of data directories, since they must exist inside the root of one. A value of . means that relevant files exist at the root of the archive.",
                           "items": {
                             "oneOf": [
                               {
@@ -144,7 +111,91 @@
                                         "type": "array",
                                         "items": {
                                           "type": "string",
-                                          "description": "In the same sequence as intended to be written in OpenMW.cfg, each field of this array defines a data directory that this one depends upon."
+                                          "description": "In the same sequence as intended to be written in OpenMW.cfg, each field of this array defines a data directory that this one depends upon. This is for cases where one mod needs a retexture or replacement mesh, etc, which it does not provide itself, such as Project Atlas' MET module depending on MET itself. It *may* be possible in some exceptional cases that a data directory depends on a plugin and may also be recorded here."
+                                        }
+                                      },
+                                      "recommended": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "description": "In the same sequence as intended to be written in OpenMW.cfg, each field of this array defines a data directory that this one recommends using. For example, S3maphore's MUSE expansion module may be used by itself or alongside any or all of the MUSE expansions."
+                                        }
+                                      },
+                                      "content_files": {
+                                        "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
+                                        "type": "array",
+                                        "items": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string",
+                                              "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                              "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                                            },
+                                            {
+                                              "type": "object",
+                                              "patternProperties": {
+                                                "^.*$": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "depends": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string",
+                                                        "description": "In the same sequence as defined in the plugin's TES3 header, each field of this array defines a content file that this one depends upon.",
+                                                        "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                                        "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                                                      }
+                                                    },
+                                                    "recommended": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string",
+                                                        "description": "Each field of this array defines a content file that is recommended to be used with this one, but not required.",
+                                                        "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                                        "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                                                      }
+                                                    }
+                                                  },
+                                                  "additionalProperties": false
+                                                }
+                                              },
+                                              "maxProperties": 1
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "groundcover": {
+                                        "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
+                                        "type": "array",
+                                        "items": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string",
+                                              "pattern": "\\.(esp|esm|omwaddon)$",
+                                              "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon."
+                                            },
+                                            {
+                                              "type": "object",
+                                              "patternProperties": {
+                                                "^.*$": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "depends": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string",
+                                                        "description": "In the same sequence as defined in the plugin's TES3 header, each field of this array defines a groundcover plugin that this one depends upon. Very unusual for groundcover plugins, but possible.",
+                                                        "pattern": "\\.(esp|esm|omwaddon)$",
+                                                        "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon."
+                                                      }
+                                                    }
+                                                  },
+                                                  "additionalProperties": false
+                                                }
+                                              },
+                                              "maxProperties": 1
+                                            }
+                                          ]
                                         }
                                       }
                                     },
@@ -159,15 +210,6 @@
                         "fallbacks": {
                           "type": "object",
                           "description": "Set of openmw.cfg edits made by a given mod, such as changing UI colors or font. No validation is provided for these fields!"
-                        },
-                        "groundcover": {
-                          "type": "array",
-                          "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
-                          "items": {
-                            "type": "string",
-                            "pattern": "\\.(esp|esm|omwaddon)$",
-                            "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon"
-                          }
                         },
                         "settings": {
                           "type": "object",

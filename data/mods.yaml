@@ -11,23 +11,88 @@ Decor:
         Mannequins For Sale:
           direct_download: http://hostx.me/morrowind/files/MannequinsForSale.zip
           directories:
-            - .
-          content_files:
-            - Mannequins Resource.esp:
-                depends:
-                  - Morrowind.esm
-                  - Tribunal.esm
-                  - Bloodmoon.esm
-            - Mannequins for Sale.esp:
-                depends:
-                  - Morrowind.esm
-                  - Tribunal.esm
-                  - Bloodmoon.esm
-                  - Mannequins Resource.esp
+            - .:
+                content_files:
+                  - Mannequins Resource.esp:
+                      depends:
+                        - Morrowind.esm
+                        - Tribunal.esm
+                        - Bloodmoon.esm
+                  - Mannequins for Sale.esp:
+                      depends:
+                        - Morrowind.esm
+                        - Tribunal.esm
+                        - Bloodmoon.esm
+                        - Mannequins Resource.esp
 
       sw0rdsinger:
         Mannequins For Sale:
           use_default: true
+
+Music:
+  S3maphore:
+    author: S3ctor
+    description: |-
+      Extensible music framework based upon OpenMW's built-in music script, with support for both Dynamic Music and MUSE modules.
+    url: https://www.nexusmods.com/morrowind/mods/56836
+    configurations:
+      provides:
+        S3maphore Core:
+          # NOTE: Since the database is only just starting, S3maphore's explicit dependencies upon other music modules are not yet defined, since the data directories they need simply don't exist yet.
+          directories:
+            - 00 Core:
+                content_files:
+                  - S3maphore.esp
+            - 01 Tamriel Rebuilt Playlists:
+                depends:
+                  - S3maphore Core/00 Core
+            - 02 Project Cyrodiil Playlists:
+                depends:
+                  - S3maphore Core/00 Core
+            - 03 Muse Expansion Playlists:
+                depends:
+                  - S3maphore Core/00 Core
+            - 04 Vindsvept Solstheim:
+                depends:
+                  - S3maphore Core/00 Core
+            - 05 Secrets of the Crystal City:
+                depends:
+                  - S3maphore Core/00 Core
+            - 06 Songbook of the North:
+                depends:
+                  - S3maphore Core/00 Core
+            - 07 Starwind Playlists:
+                depends:
+                  - S3maphore Core/00 Core
+            - 08 Redguard Music:
+                depends:
+                  - S3maphore Core/00 Core
+            - 09 Nordic Lands:
+                depends:
+                  - S3maphore Core/00 Core
+            - 10 Inns and Taverns:
+                depends:
+                  - S3maphore Core/00 Core
+            - 11 Daggerfall Guild Themes:
+                depends:
+                  - S3maphore Core/00 Core
+            - 12 BBL Drizzy:
+                depends:
+                  - S3maphore Core/00 Core
+
+      sw0rdsinger:
+        S3maphore Core:
+          directories:
+            - 00 Core:
+                content_files:
+                  - S3maphore.esp
+            - 01 Tamriel Rebuilt Playlists
+            - 02 Project Cyrodiil Playlists
+            - 03 Muse Expansion Playlists
+            - 04 Vindsvept Solstheim
+            - 06 Songbook of the North
+            - 09 Nordic Lands
+            - 10 Inns and Taverns
 
 Total Conversions:
   Arktwend - OpenMW port:
@@ -42,33 +107,30 @@ Total Conversions:
           config:
             - .
 
-          content_files:
-            - Arktwend_English.esm
-
           directories:
-            - Arktwend/Data Files
+            - Arktwend/Data Files:
+                content_files:
+                  - Arktwend_English.esm
 
         Arktwend General Fixes:
           directories:
             - Arktwend_Fixes/Data Files:
                 depends:
                   - Arktwend/Data Files
-
-          content_files:
-            - Arktwend_Fixes.esp:
-                depends:
-                  - Arktwend_English.esm
+                content_files:
+                  - Arktwend_Fixes.esp:
+                      depends:
+                        - Arktwend_English.esm
 
         TAO compatibility patch:
           directories:
             - TAO:
                 depends:
                   - Arktwend/Data Files
-
-          content_files:
-            - TAO.esp:
-                depends:
-                  - Arktwend_English.esm
+                content_files:
+                  - TAO.esp:
+                      depends:
+                        - Arktwend_English.esm
 
   Arktwend English Cutscenes:
     url: https://www.nexusmods.com/morrowind/mods/33639
