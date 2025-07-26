@@ -12,10 +12,11 @@
     "^[a-zA-Z0-9;:\\-_ ]+$": {
       "type": "object",
       "title": "Mod",
-      "description": "Comprehensive definition of how a given mod interacts with the engine. It encompasses everything *except* sequencing, as this is meant to occur on a list-specific basis and/or be handled by LOOT.",
+      "description": "The category to which mods following it belong. This is used to determine the root subdirectory used by this particular mod in DW-Web *and* during openmw.cfg generation",
       "patternProperties": {
         "^[a-zA-Z0-9;:\\-_ ]+$": {
           "type": "object",
+          "description": "Comprehensive definition of how a given mod interacts with the engine. It encompasses everything *except* sequencing, as this is meant to occur on a list-specific basis and/or be handled by LOOT.",
           "properties": {
             "author": {
               "type": "string",
@@ -39,7 +40,7 @@
             },
             "configurations": {
               "type": "object",
-              "description": "Map of modlist names to configurations associated with the mod. The minimum requirement is either a single data directory, or a config directory, but this also includes content files and adjustments to settings.cfg",
+              "description": "Map of modlist names to configurations associated with the mod. The minimum requirement is either a single data directory, or a config directory, but this also includes content files and adjustments to settings.cfg, and even additional configuration directories. The special `provides` list indicates all possible configurations a mod provides and isn't necessarily sane.",
               "propertyNames": {
                 "enum": [
                   "iHeartVanilla",
@@ -48,87 +49,117 @@
                 ]
               },
               "patternProperties": {
-                "^[a-zA-Z0-9;:\\-_ ]+$": {
+                "^[a-zA-Z0-9;:\\-_\\. ]+$": {
                   "type": "object",
+                  "title": "archive",
                   "description": "Modlist-specfic configurations for this mod. The `provides` modlist is a special value which is only displayed on the mod's specific page. It refers to all configurations that may be provided by a mod, and may or may not even contain sane values.",
-                  "properties": {
-                    "additionalProperties": false,
-                    "config": {
-                      "type": "array",
-                      "description": "Relative path to a configuration directory provided by this mod",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "content_files": {
-                      "type": "array",
-                      "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files.",
-                      "items": {
-                        "type": "string",
-                        "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
-                        "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
-                      }
-                    },
-                    "directories": {
-                      "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod.",
-                      "type": "array",
-                      "items": {
-                        "type": "string"
+                  "patternProperties": {
+                    "^[a-zA-Z0-9;:\\-_\\. ]+$": {
+                      "type": "object",
+                      "description": "This field indicates the name of a given archive associated with a mod. For example, a given mod on Nexus, may have multiple required downloads, even though they are both from the same mod. This field's name should correlate directly to each downloaded file from NexusMods.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "additionalProperties": false,
+                        "direct_download": {
+                          "type": "string",
+                          "description": "This field indicates the actual direct download link for a mod, if available. Mods posted on nexus do not support this."
+                        },
+                        "duplicate": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "nexus_file_id": {
+                                "type": "integer",
+                                "description": "A specific nexus fileID associated with this archive. Only use when multiple nexus files by identical names exist!"
+                              },
+                              "extract_to": {
+                                "type": "string",
+                                "description": "Path to which this specific archive should be extracted. If no duplicates are present the archive name is used as the extraction directory."
+                              }
+                            },
+                            "description": "This field is used when a duplicate file name exists for a nexus mod. This specifies an explicit nexus file id and a directory to which this mod should be extracted. If there are no duplicates, the archive name is used during extraction."
+                          },
+                          "required": [
+                            "nexus_file_id",
+                            "extract_to"
+                          ]
+                        },
+                        "config": {
+                          "type": "array",
+                          "description": "Relative path to a configuration directory provided by this mod",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "content_files": {
+                          "type": "array",
+                          "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files.",
+                          "items": {
+                            "type": "string",
+                            "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                            "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                          }
+                        },
+                        "directories": {
+                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod.",
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        },
+                        "fallbacks": {
+                          "type": "object",
+                          "description": "Set of openmw.cfg edits made by a given mod, such as changing UI colors or font. No validation is provided for these fields!"
+                        },
+                        "groundcover": {
+                          "type": "array",
+                          "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
+                          "items": {
+                            "type": "string",
+                            "pattern": "\\.(esp|esm|omwaddon)$",
+                            "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon"
+                          }
+                        },
+                        "settings": {
+                          "type": "object",
+                          "description": "Alterations to settings.cfg provided by a given mod.",
+                          "propertyNames": {
+                            "enum": [
+                              "Camera",
+                              "Cells",
+                              "Fog",
+                              "Groundcover",
+                              "Input",
+                              "Map",
+                              "GUI",
+                              "HUD",
+                              "Game",
+                              "General",
+                              "Lua",
+                              "Models",
+                              "Navigator",
+                              "Physics",
+                              "Post Processing",
+                              "Saves",
+                              "Shaders",
+                              "Shadows",
+                              "Sound",
+                              "Stereo",
+                              "Stereo View",
+                              "Terrain",
+                              "Video",
+                              "Water",
+                              "Windows"
+                            ]
+                          }
+                        },
+                        "use_default": {
+                          "const": "true",
+                          "description": "If this field is used, then it means that the modlist does not have special configuration requirements and the configurations from the `provides` special list will be used."
+                        }
                       },
-                      "minItems": 1
-                    },
-                    "fallbacks": {
-                      "type": "object",
-                      "description": "Set of openmw.cfg edits made by a given mod, such as changing UI colors or font. No validation is provided for these fields!"
-                    },
-                    "groundcover": {
-                      "type": "array",
-                      "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
-                      "items": {
-                        "type": "string",
-                        "pattern": "\\.(esp|esm|omwaddon)$",
-                        "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon"
-                      }
-                    },
-                    "settings": {
-                      "type": "object",
-                      "description": "Alterations to settings.cfg provided by a given mod.",
-                      "propertyNames": {
-                        "enum": [
-                          "Camera",
-                          "Cells",
-                          "Fog",
-                          "Groundcover",
-                          "Input",
-                          "Map",
-                          "GUI",
-                          "HUD",
-                          "Game",
-                          "General",
-                          "Lua",
-                          "Models",
-                          "Navigator",
-                          "Physics",
-                          "Post Processing",
-                          "Saves",
-                          "Shaders",
-                          "Shadows",
-                          "Sound",
-                          "Stereo",
-                          "Stereo View",
-                          "Terrain",
-                          "Video",
-                          "Water",
-                          "Windows"
-                        ]
-                      }
-                    },
-                    "use_default": {
-                      "const": "true"
-                    }
-                  },
-                  "oneOf": [
-                    {
                       "anyOf": [
                         {
                           "required": [
@@ -139,15 +170,15 @@
                           "required": [
                             "config"
                           ]
+                        },
+                        {
+                          "required": [
+                            "use_default"
+                          ]
                         }
                       ]
-                    },
-                    {
-                      "required": [
-                        "use_default"
-                      ]
                     }
-                  ]
+                  }
                 }
               },
               "required": [

@@ -8,31 +8,46 @@ Decor:
     url: http://hostx.me/morrowind/#mannequins
     configurations:
       provides:
-        directories:
-          - .
-        content_files:
-          - Mannequins Resource.esp
-          - Mannequins for Sale.esp
+        Mannequins For Sale:
+          directories:
+            - .
+          content_files:
+            - Mannequins Resource.esp
+            - Mannequins for Sale.esp
 
       sw0rdsinger:
-        use_default: true
+        Mannequins For Sale:
+          use_default: true
 
 Total Conversions:
   Arktwend - OpenMW port:
     url: https://www.nexusmods.com/morrowind/mods/45611
-    author: "SureAI"
+    author: SureAI
     description: |-
       Port of the English version of the Arktwend total conversion to OpenMW.
     configurations:
       provides:
-        content_files:
-          - Arktwend_English.esm
-          - Arktwent_Fixes.esp
-          - TAO.esp
-        directories:
-          - Arktwend/Data Files
-          - Arktwend_Fixes/Data Files
-          - TAO
+        Arktwend game files:
+          config:
+            - .
+          content_files:
+            - Arktwend_English.esm
+            - TAO.esp
+          directories:
+            - Arktwend/Data Files
+
+        Arktwend General Fixes:
+          directories:
+            - Arktwend_Fixes/Data Files
+          content_files:
+            - Arktwend_Fixes.esp
+
+        TAO compatibility patch:
+          directories:
+            - TAO
+          content_files:
+            - TAO.esp
+
   Arktwend English Cutscenes:
     url: https://www.nexusmods.com/morrowind/mods/33639
     author: Brumbek
@@ -40,8 +55,10 @@ Total Conversions:
       English versions of the two cutscenes for Arktwend (with subtitles)
     configurations:
       provides:
-        directories:
-          - .
+        Arktwend_English_Cutscenes_1_0:
+          directories:
+            - .
+
   Arktwend Enhanced Textures:
     url: https://www.nexusmods.com/morrowind/mods/54859
     author: Lasergunner255
@@ -49,5 +66,10 @@ Total Conversions:
       A Complete upscaled Texture pack for Arktwend encompassing every texture added or modified by arktwend during the installation.
     configurations:
       provides:
-        directories:
-          - Arktwend Enhanced Textures
+        Ver 1.1:
+          directories:
+            - Arktwend Enhanced Textures
+
+        1.0 to 1.1 fix:
+          directories:
+            - water spray fix
