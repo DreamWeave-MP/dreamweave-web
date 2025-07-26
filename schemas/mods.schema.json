@@ -50,7 +50,129 @@
                 ]
               },
               "patternProperties": {
-                "^.*$": {
+                "^(?!provides$).*$": {
+                  "type": "object",
+                  "title": "archive",
+                  "description": "Modlist-specfic configurations for this mod. The `provides` modlist is a special value which is only displayed on the mod's specific page. It refers to all configurations that may be provided by a mod, and may or may not even contain sane values.",
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "description": "This field indicates the name of a given archive associated with a mod. For example, a given mod on Nexus, may have multiple required downloads, even though they are both from the same mod. This field's name should correlate directly to each downloaded file from NexusMods.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "additionalProperties": false,
+                        "config": {
+                          "type": "array",
+                          "description": "Relative path to a configuration directory provided by this mod",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "directories": {
+                          "type": "array",
+                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod. Additionally, by using an object instead of a string, dependences for specific data directories may be defined. Content files and groundcover entries are also children of data directories, since they must exist inside the root of one. A value of . means that relevant files exist at the root of the archive.",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "patternProperties": {
+                                  "^.*$": {
+                                    "type": "object",
+                                    "properties": {
+                                      "content_files": {
+                                        "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                          "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                                        }
+                                      },
+                                      "groundcover": {
+                                        "description": "Groundcover plugins used by a mod, eg ESP, ESM, and omwaddon files.",
+                                        "type": "array",
+                                        "items": {
+                                          "description": "In the same sequence as defined in the plugin's TES3 header, each field of this array defines a groundcover plugin that this one depends upon. Very unusual for groundcover plugins, but possible.",
+                                          "type": "string",
+                                          "pattern": "\\.(esp|esm|omwaddon)$",
+                                          "patternErrorMessage": "Must end with .esp, .esm, or .omwaddon."
+                                        }
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "maxProperties": 1
+                              }
+                            ]
+                          }
+                        },
+                        "fallbacks": {
+                          "type": "object",
+                          "description": "Set of openmw.cfg edits made by a given mod, such as changing UI colors or font. No validation is provided for these fields!"
+                        },
+                        "settings": {
+                          "type": "object",
+                          "description": "Alterations to settings.cfg provided by a given mod.",
+                          "propertyNames": {
+                            "enum": [
+                              "Camera",
+                              "Cells",
+                              "Fog",
+                              "Groundcover",
+                              "Input",
+                              "Map",
+                              "GUI",
+                              "HUD",
+                              "Game",
+                              "General",
+                              "Lua",
+                              "Models",
+                              "Navigator",
+                              "Physics",
+                              "Post Processing",
+                              "Saves",
+                              "Shaders",
+                              "Shadows",
+                              "Sound",
+                              "Stereo",
+                              "Stereo View",
+                              "Terrain",
+                              "Video",
+                              "Water",
+                              "Windows"
+                            ]
+                          }
+                        },
+                        "use_default": {
+                          "const": "true",
+                          "description": "If this field is used, then it means that the modlist does not have special configuration requirements and the configurations from the `provides` special list will be used."
+                        }
+                      },
+                      "anyOf": [
+                        {
+                          "required": [
+                            "directories"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "config"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "use_default"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                "^provides$": {
                   "type": "object",
                   "title": "archive",
                   "description": "Modlist-specfic configurations for this mod. The `provides` modlist is a special value which is only displayed on the mod's specific page. It refers to all configurations that may be provided by a mod, and may or may not even contain sane values.",
@@ -243,10 +365,6 @@
                               "Windows"
                             ]
                           }
-                        },
-                        "use_default": {
-                          "const": "true",
-                          "description": "If this field is used, then it means that the modlist does not have special configuration requirements and the configurations from the `provides` special list will be used."
                         }
                       },
                       "anyOf": [
@@ -258,11 +376,6 @@
                         {
                           "required": [
                             "config"
-                          ]
-                        },
-                        {
-                          "required": [
-                            "use_default"
                           ]
                         }
                       ]
