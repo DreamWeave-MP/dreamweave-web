@@ -49,12 +49,12 @@
                 ]
               },
               "patternProperties": {
-                "^[a-zA-Z0-9;:\\-_\\. ]+$": {
+                "^.*$": {
                   "type": "object",
                   "title": "archive",
                   "description": "Modlist-specfic configurations for this mod. The `provides` modlist is a special value which is only displayed on the mod's specific page. It refers to all configurations that may be provided by a mod, and may or may not even contain sane values.",
                   "patternProperties": {
-                    "^[a-zA-Z0-9;:\\-_\\. ]+$": {
+                    "^.*$": {
                       "type": "object",
                       "description": "This field indicates the name of a given archive associated with a mod. For example, a given mod on Nexus, may have multiple required downloads, even though they are both from the same mod. This field's name should correlate directly to each downloaded file from NexusMods.",
                       "additionalProperties": false,
@@ -93,21 +93,68 @@
                           }
                         },
                         "content_files": {
+                          "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
                           "type": "array",
-                          "description": "Plugins used by a mod, eg ESP, ESM, omwaddon, and omwscripts files.",
                           "items": {
-                            "type": "string",
-                            "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
-                            "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                              },
+                              {
+                                "type": "object",
+                                "patternProperties": {
+                                  "^.*$": {
+                                    "type": "object",
+                                    "properties": {
+                                      "depends": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "description": "In the same sequence as defined in the plugin's TES3 header, each field of this array defines a content file that this one depends upon.",
+                                          "pattern": "\\.(esp|esm|omwaddon|omwscripts)$",
+                                          "patternErrorMessage": "Must end with .esp, .esm, .omwaddon, or .omwscripts"
+                                        }
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "maxProperties": 1
+                              }
+                            ]
                           }
                         },
                         "directories": {
-                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod.",
                           "type": "array",
+                          "description": "Data directories used by a particular mod. At least one data directory is required, and it is the only required configuration type for every mod. Additionally, by using an object instead of a string, dependences for specific data directories may be defined.",
                           "items": {
-                            "type": "string"
-                          },
-                          "minItems": 1
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "patternProperties": {
+                                  "^.*$": {
+                                    "type": "object",
+                                    "properties": {
+                                      "depends": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "description": "In the same sequence as intended to be written in OpenMW.cfg, each field of this array defines a data directory that this one depends upon."
+                                        }
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "maxProperties": 1
+                              }
+                            ]
+                          }
                         },
                         "fallbacks": {
                           "type": "object",

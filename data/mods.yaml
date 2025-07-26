@@ -9,11 +9,21 @@ Decor:
     configurations:
       provides:
         Mannequins For Sale:
+          direct_download: http://hostx.me/morrowind/files/MannequinsForSale.zip
           directories:
             - .
           content_files:
-            - Mannequins Resource.esp
-            - Mannequins for Sale.esp
+            - Mannequins Resource.esp:
+                depends:
+                  - Morrowind.esm
+                  - Tribunal.esm
+                  - Bloodmoon.esm
+            - Mannequins for Sale.esp:
+                depends:
+                  - Morrowind.esm
+                  - Tribunal.esm
+                  - Bloodmoon.esm
+                  - Mannequins Resource.esp
 
       sw0rdsinger:
         Mannequins For Sale:
@@ -25,28 +35,40 @@ Total Conversions:
     author: SureAI
     description: |-
       Port of the English version of the Arktwend total conversion to OpenMW.
+
     configurations:
       provides:
         Arktwend game files:
           config:
             - .
+
           content_files:
             - Arktwend_English.esm
-            - TAO.esp
+
           directories:
             - Arktwend/Data Files
 
         Arktwend General Fixes:
           directories:
-            - Arktwend_Fixes/Data Files
+            - Arktwend_Fixes/Data Files:
+                depends:
+                  - Arktwend/Data Files
+
           content_files:
-            - Arktwend_Fixes.esp
+            - Arktwend_Fixes.esp:
+                depends:
+                  - Arktwend_English.esm
 
         TAO compatibility patch:
           directories:
-            - TAO
+            - TAO:
+                depends:
+                  - Arktwend/Data Files
+
           content_files:
-            - TAO.esp
+            - TAO.esp:
+                depends:
+                  - Arktwend_English.esm
 
   Arktwend English Cutscenes:
     url: https://www.nexusmods.com/morrowind/mods/33639
@@ -57,7 +79,9 @@ Total Conversions:
       provides:
         Arktwend_English_Cutscenes_1_0:
           directories:
-            - .
+            - .:
+                depends:
+                  - "Arktwend/Data Files"
 
   Arktwend Enhanced Textures:
     url: https://www.nexusmods.com/morrowind/mods/54859
@@ -68,8 +92,12 @@ Total Conversions:
       provides:
         Ver 1.1:
           directories:
-            - Arktwend Enhanced Textures
+            - Arktwend Enhanced Textures:
+                depends:
+                  - Arktwend/Data Files
 
         1.0 to 1.1 fix:
           directories:
-            - water spray fix
+            - water spray fix:
+                depends:
+                  - Arktwend Enhanced Textures
