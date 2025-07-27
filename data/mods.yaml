@@ -33,6 +33,32 @@ Decor:
         Mannequins For Sale:
           use_default: true
 
+Gameplay:
+  Weapon Refinement Lua:
+    author: Zusk
+    url: https://www.nexusmods.com/morrowind/mods/54712
+
+    description: |-
+      Adds a new mechanic to the game which allows improving the quality of one's own weapons by using armor benches acquired from vendors.
+      WRL also has support for Starwind!
+
+    tags:
+      - Gear
+      - Immersion
+      - New Mechanics
+      - Starwind
+
+    configurations:
+      provides:
+        main:
+          extract_to: WeaponRefinementLua
+          directories:
+            - weapon-refinement-lua:
+                recommended:
+                  - Starwind3.1/Data Files
+                content_files:
+                  - weapon-refinement-lua.omwscripts
+
 Music:
   S3maphore:
     author: S3ctor

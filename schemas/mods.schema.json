@@ -5,6 +5,7 @@
   "propertyNames": {
     "enum": [
       "Decor",
+      "Gameplay",
       "Music",
       "Total Conversions",
       "Weapons"
