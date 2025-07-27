@@ -34,8 +34,29 @@
             "tags": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
+                "type": "string",
+                "enum": [
+                  "Armor",
+                  "Bugfix",
+                  "Creatures",
+                  "Expansion",
+                  "Gameplay",
+                  "Graphics",
+                  "Housing",
+                  "Immersion",
+                  "Interface",
+                  "Lore-Friendly",
+                  "NPCs",
+                  "Overhaul",
+                  "Performance",
+                  "Quest",
+                  "Sound",
+                  "Translation",
+                  "Utility",
+                  "Weapons"
+                ]
+              },
+              "uniqueItems": true
             },
             "version": {
               "type": "string"

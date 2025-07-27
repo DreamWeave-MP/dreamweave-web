@@ -6,6 +6,10 @@ Decor:
       I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
       Visit the shop in Caldera to get started. Now with wigs!
     url: http://hostx.me/morrowind/#mannequins
+    tags:
+      - Immersion
+      - Utility
+      - Housing
     configurations:
       provides:
         Mannequins For Sale:
