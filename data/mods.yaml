@@ -207,27 +207,27 @@ Weapons:
     configurations:
       provides:
         Improved Thrown Weapon Projectiles:
-          extract_to: ImprovedThrownWeaponProjectiles
+          extract_to: ITWP
 
           actions:
             - copy:
-                - source: ImprovedThrownWeaponProjectiles/Pathes/w_dart_ebony.nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_dart_ebony.nif
+                - source: ITWP/Pathes/w_dart_ebony.nif
+                  dest: ITWP/Patches/Meshes/w/w_dart_ebony.nif
 
-                - source: ImprovedThrownWeaponProjectiles/Patches/w_dart_steel.nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_dart_steel.nif
+                - source: ITWP/Patches/w_dart_steel.nif
+                  dest: ITWP/Patches/Meshes/w/w_dart_steel.nif
 
-                - source: ImprovedThrownWeaponProjectiles/Patches/w_star_ebony.nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_star_ebony.nif
+                - source: ITWP/Patches/w_star_ebony.nif
+                  dest: ITWP/Patches/Meshes/w/w_star_ebony.nif
 
-                - source: ImprovedThrownWeaponProjectiles/Patches/w_knife_iron.nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_knife_iron.nif
+                - source: ITWP/Patches/w_knife_iron.nif
+                  dest: ITWP/Patches/Meshes/w/w_knife_iron.nif
 
-                - source: ImprovedThrownWeaponProjectiles/Patches/w_steel_knife.nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_steel_knife.nif
+                - source: ITWP/Patches/w_steel_knife.nif
+                  dest: ITWP/Patches/Meshes/w/w_steel_knife.nif
 
-                - source: ImprovedThrownWeaponProjectiles/Patches/w_steel_star .nif
-                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_steel_star .nif
+                - source: ITWP/Patches/w_steel_star .nif
+                  dest: ITWP/Patches/Meshes/w/w_steel_star .nif
 
           directories:
             - Data Files
