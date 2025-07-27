@@ -167,3 +167,44 @@ Total Conversions:
             - water spray fix:
                 depends:
                   - Arktwend Enhanced Textures
+
+Weapons:
+  Improved Thrown Weapon Projectiles:
+    author: Reizeron
+    description: |-
+      Makes thrown weapon projectiles fly pointy end forward and, some of them, spin in the air.
+    url: https://www.nexusmods.com/morrowind/mods/44763
+    configurations:
+      provides:
+        Improved Thrown Weapon Projectiles:
+          duplicate:
+            - nexus_file_id: 44763
+              extract_to: ImprovedThrownWeaponProjectiles
+
+          actions:
+            - copy:
+                - source: ImprovedThrownWeaponProjectiles/Pathes/w_dart_ebony.nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_dart_ebony.nif
+
+                - source: ImprovedThrownWeaponProjectiles/Patches/w_dart_steel.nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_dart_steel.nif
+
+                - source: ImprovedThrownWeaponProjectiles/Patches/w_star_ebony.nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_star_ebony.nif
+
+                - source: ImprovedThrownWeaponProjectiles/Patches/w_knife_iron.nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_knife_iron.nif
+
+                - source: ImprovedThrownWeaponProjectiles/Patches/w_steel_knife.nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_steel_knife.nif
+
+                - source: ImprovedThrownWeaponProjectiles/Patches/w_steel_star .nif
+                  dest: ImprovedThrownWeaponProjectiles/Patches/Meshes/w/w_steel_star .nif
+
+          directories:
+            - Data Files
+            - Patches
+
+        Glass Throwables Patch for Glass Glowset:
+          directories:
+            - .
