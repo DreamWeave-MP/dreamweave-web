@@ -209,6 +209,145 @@
                             "extract_to"
                           ]
                         },
+                        "actions": {
+                          "type": "array",
+                          "description": "Special actions that need be taken to install a particular mod on a list-specific basis. These actions include copying, moving, or deleting files, cleaning with tes3cmd, or any other arbitrary tes3cmd actions. Note that `lists` is an optional field - omitting it for a specific action indicates it is used on all lists.",
+                          "items": {
+                            "type": "object",
+                            "oneOf": [
+                              {
+                                "properties": {
+                                  "copy": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "source": {
+                                          "type": "string"
+                                        },
+                                        "dest": {
+                                          "type": "string"
+                                        },
+                                        "lists": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "source",
+                                        "dest"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "copy"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "properties": {
+                                  "rename": {
+                                    "type": "array",
+                                    "description": "An array of source files to their new intended destinations. Both `source` and `dest` fields are paths relative to the mod list root directory, when installed.",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "from": {
+                                          "type": "string"
+                                        },
+                                        "to": {
+                                          "type": "string"
+                                        },
+                                        "lists": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "from",
+                                        "to"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "rename"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "properties": {
+                                  "delete": {
+                                    "type": "object",
+                                    "properties": {
+                                      "directories": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        },
+                                        "minItems": 1
+                                      },
+                                      "files": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        },
+                                        "minItems": 1
+                                      },
+                                      "lists": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "oneOf": [
+                                      {
+                                        "required": [
+                                          "files"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "directories"
+                                        ]
+                                      }
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "required": [
+                                  "delete"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "properties": {
+                                  "tes3cmd": {
+                                    "type": "array",
+                                    "description": "Array of strings to concatenate and pass to tes3cmd. Each tes3cmd action is equivalent to using it in the command-line, omitting the actual path to the tes3cmd executable.",
+                                    "items": {
+                                      "type": "string",
+                                      "description": "A single step in a tes3cmd chain, such as `delete` or `--exact-id`."
+                                    },
+                                    "minItems": 2
+                                  }
+                                },
+                                "required": [
+                                  "tes3cmd"
+                                ],
+                                "additionalProperties": false
+                              }
+                            ]
+                          }
+                        },
                         "config": {
                           "type": "array",
                           "description": "Relative path to a configuration directory provided by this mod",
