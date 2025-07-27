@@ -28,6 +28,10 @@
             "description": {
               "type": "string"
             },
+            "nexus_mod_id": {
+              "type": "integer",
+              "description": "This option may be used in lieu of a direct page url for mods hosted on Nexus. The displayed pages are richer due to the simpler templating format."
+            },
             "tags": {
               "type": "array",
               "items": {
@@ -576,11 +580,28 @@
               }
             }
           },
-          "required": [
-            "author",
-            "description",
-            "url",
-            "version"
+          "allOf": [
+            {
+              "required": [
+                "author",
+                "description",
+                "version"
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "required": [
+                    "url"
+                  ]
+                },
+                {
+                  "required": [
+                    "nexus_mod_id"
+                  ]
+                }
+              ]
+            }
           ],
           "additionalProperties": false
         }

@@ -37,7 +37,7 @@ Decor:
 Gameplay:
   Weapon Refinement Lua:
     author: Zusk
-    url: https://www.nexusmods.com/morrowind/mods/54712
+    nexus_mod_id: 54712
     version: "1.1"
 
     description: |-
@@ -66,7 +66,7 @@ Music:
     author: S3ctor
     description: |-
       Extensible music framework based upon OpenMW's built-in music script, with support for both Dynamic Music and MUSE modules.
-    url: https://www.nexusmods.com/morrowind/mods/56836
+    nexus_mod_id: 56836
     version: "0.54"
     configurations:
       provides:
@@ -134,7 +134,7 @@ Music:
 Total Conversions:
   Arktwend - OpenMW port:
     author: SureAI
-    url: https://www.nexusmods.com/morrowind/mods/45611
+    nexus_mod_id: 45611
     version: "1.0"
     description: |-
       Port of the English version of the Arktwend total conversion to OpenMW.
@@ -172,7 +172,7 @@ Total Conversions:
 
   Arktwend English Cutscenes:
     author: Brumbek
-    url: https://www.nexusmods.com/morrowind/mods/33639
+    nexus_mod_id: 33639
     version: "1.0"
 
     description: |-
@@ -187,7 +187,7 @@ Total Conversions:
 
   Arktwend Enhanced Textures:
     author: Lasergunner255
-    url: https://www.nexusmods.com/morrowind/mods/54859
+    nexus_mod_id: 54859
     version: "1.0"
 
     description: |-
@@ -211,7 +211,7 @@ Weapons:
     author: Reizeron
     description: |-
       Makes thrown weapon projectiles fly pointy end forward and, some of them, spin in the air.
-    url: https://www.nexusmods.com/morrowind/mods/44763
+    nexus_mod_id: 44763
     version: "1.0"
 
     configurations:
