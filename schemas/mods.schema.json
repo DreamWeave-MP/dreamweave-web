@@ -218,8 +218,13 @@
                           "type": "string",
                           "description": "This field indicates the actual direct download link for a mod, if available. Mods posted on nexus do not support this."
                         },
+                        "extract_to": {
+                          "type": "string",
+                          "description": "If this field is present, it will be used in place of the archive name as the extraction directory. Useful for shortening long paths."
+                        },
                         "duplicate": {
                           "type": "array",
+                          "description": "This field is used in order to handle instances where one mod has two nexus archives by the same name. The file IDs and extraction paths must be provided.",
                           "items": {
                             "type": "object",
                             "properties": {

@@ -181,9 +181,7 @@ Weapons:
     configurations:
       provides:
         Improved Thrown Weapon Projectiles:
-          duplicate:
-            - nexus_file_id: 44763
-              extract_to: ImprovedThrownWeaponProjectiles
+          extract_to: ImprovedThrownWeaponProjectiles
 
           actions:
             - copy:
