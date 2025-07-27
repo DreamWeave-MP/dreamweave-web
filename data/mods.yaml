@@ -1,5 +1,6 @@
 Decor:
   Mannequins for Sale:
+    version: "1.31"
     author: ManaUser
     description: |-
       Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
@@ -37,6 +38,7 @@ Gameplay:
   Weapon Refinement Lua:
     author: Zusk
     url: https://www.nexusmods.com/morrowind/mods/54712
+    version: "1.1"
 
     description: |-
       Adds a new mechanic to the game which allows improving the quality of one's own weapons by using armor benches acquired from vendors.
@@ -65,6 +67,7 @@ Music:
     description: |-
       Extensible music framework based upon OpenMW's built-in music script, with support for both Dynamic Music and MUSE modules.
     url: https://www.nexusmods.com/morrowind/mods/56836
+    version: "0.54"
     configurations:
       provides:
         S3maphore Core:
@@ -130,8 +133,9 @@ Music:
 
 Total Conversions:
   Arktwend - OpenMW port:
-    url: https://www.nexusmods.com/morrowind/mods/45611
     author: SureAI
+    url: https://www.nexusmods.com/morrowind/mods/45611
+    version: "1.0"
     description: |-
       Port of the English version of the Arktwend total conversion to OpenMW.
 
@@ -167,8 +171,10 @@ Total Conversions:
                         - Arktwend_English.esm
 
   Arktwend English Cutscenes:
-    url: https://www.nexusmods.com/morrowind/mods/33639
     author: Brumbek
+    url: https://www.nexusmods.com/morrowind/mods/33639
+    version: "1.0"
+
     description: |-
       English versions of the two cutscenes for Arktwend (with subtitles)
     configurations:
@@ -180,8 +186,10 @@ Total Conversions:
                   - "Arktwend/Data Files"
 
   Arktwend Enhanced Textures:
-    url: https://www.nexusmods.com/morrowind/mods/54859
     author: Lasergunner255
+    url: https://www.nexusmods.com/morrowind/mods/54859
+    version: "1.0"
+
     description: |-
       A Complete upscaled Texture pack for Arktwend encompassing every texture added or modified by arktwend during the installation.
     configurations:
@@ -204,6 +212,8 @@ Weapons:
     description: |-
       Makes thrown weapon projectiles fly pointy end forward and, some of them, spin in the air.
     url: https://www.nexusmods.com/morrowind/mods/44763
+    version: "1.0"
+
     configurations:
       provides:
         Improved Thrown Weapon Projectiles:

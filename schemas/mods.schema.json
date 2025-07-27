@@ -579,7 +579,8 @@
           "required": [
             "author",
             "description",
-            "url"
+            "url",
+            "version"
           ],
           "additionalProperties": false
         }
