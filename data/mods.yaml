@@ -79,6 +79,9 @@ Music:
             - 12 BBL Drizzy:
                 depends:
                   - S3maphore Core/00 Core
+            - 14 Generic Dungeon:
+                depends:
+                  - S3maphore Core/00 Core
 
       sw0rdsinger:
         S3maphore Core:
@@ -93,6 +96,7 @@ Music:
             - 06 Songbook of the North
             - 09 Nordic Lands
             - 10 Inns and Taverns
+            - 14 Generic Dungeon
 
 Total Conversions:
   Arktwend - OpenMW port:
