@@ -6,7 +6,8 @@
     "enum": [
       "Decor",
       "Music",
-      "Total Conversions"
+      "Total Conversions",
+      "Weapons"
     ]
   },
   "patternProperties": {
