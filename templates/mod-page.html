@@ -8,15 +8,112 @@
 {% endblock %}
 
 {% block content %}
+{% set all_mods = load_data(path="data/mods.yaml") %}
+{% set category = page.taxonomies.category[0] %}
+{% set mod_category = all_mods[category] %}
+{% set current_mod = mod_category[page.title] %}
+
 <div class="flex flex-col gap-3 w-full">
+  {% if current_mod.nexus_mod_id %}
+  {% set game_id = current_mod.game_id | default(value=100) %}
+  {% set one_shift_32 = 4294967296 %}
+  {% set mod_uid = (game_id * one_shift_32) + current_mod.nexus_mod_id | as_str %}
+  {% set request_body = '
+        {
+          "query": "query modsByUid($uids: [ID!]!, $offset: Int, $count: Int) { modsByUid(uids: $uids, offset: $offset, count: $count) { nodes { name version summary downloads endorsements pictureUrl author updatedAt game { domainName } } } }",
+          "variables": {
+            "uids": [
+              "MOD_UID_HERE"
+            ]
+          }
+        }
+    ' | replace(from="MOD_UID_HERE", to=mod_uid)
+  %}
+  {% set postdata = load_data(url="https://api.nexusmods.com/v2/graphql", format="json", method="POST", content_type="application/json", body=request_body)%}
+  {% set_global nexus_mod_data = postdata.data.modsByUid.nodes[0] %}
+  {% set_global title = nexus_mod_data.name %}
+  {% set game_name = nexus_mod_data.game.domainName %}
+  {% set_global mod_page_url = 'https://www.nexusmods.com/GAME/mods/MOD' | replace(from="GAME", to=game_name) | replace(from="MOD", to= current_mod.nexus_mod_id | as_str) %}
+
+  {% else %}
+  {% set_global title = page.title %}
+  {% set_global mod_page_url = current_mod.non_nexus_meta.url %}
+  {% endif %}
+
   <!-- Title Badge -->
-  <span class="badge badge-xl badge-soft badge-secondary text-xl" style="width: 50vw;">
-    {{ page.title }}
+  <span class="badge badge-xl badge-soft badge-secondary text-xl wide">
+    {{ title }}
   </span>
 
   <!-- Category Badge -->
-  <span class="badge badge-xl badge-soft badge-primary text-xl" style="width: 50vw;">
-    {{ page.taxonomies.category[0] }}
+  <span class="badge badge-xl badge-soft badge-primary text-xl wide">
+    {{ category }}
   </span>
+
+  {% if nexus_mod_data %}
+  <img src="{{ nexus_mod_data.pictureUrl }}"></img>
+  <br>
+
+  {# Version Data Check #}
+  {# It would be nice to deduplicate this for non-nexus sources but it remains to be seen how exactly those can be handled #}
+  {% if nexus_mod_data.version == current_mod.version %}
+    <span class="badge badge-xl badge-outline badge-primary text-xl" style="align-self: center;">
+      Version {{ nexus_mod_data.version }} released on: {{ nexus_mod_data.updatedAt | date(format="%Y-%m-%d") }}
+    </span>
+    <br>
+  {% else %}
+    <span class="badge badge-xl badge-outline badge-warning wide badVersionBadge">
+    WARNING: The recorded version of this mod, {{ current_mod.version }}, does not match the one on NexusMods - {{ nexus_mod_data.version }}. Please use caution when updating to the latest version of {{ nexus_mod_data.name }}.
+    </span>
+  {% endif %}
+
+  <br>
+    <p style="align-self: center;">{{- nexus_mod_data.summary | safe -}}</p> 
+  <br>
+  <br>
+  {% else %}
+
+  {# Not all mods have to have pictures, but they look nicer if they do! #}
+  {% if current_mod.non_nexus_meta.picture_url %}
+  <img src="{{ current_mod.non_nexus_meta.picture_url }}" style="width: 100%; max-height: 380px;"></img>
+  <br>
+  {% endif %}
+
+    <span class="badge badge-xl badge-outline badge-primary text-xl object-center" style="align-self: center;">
+      {{- current_mod.version -}}
+    </span>
+    
+    <br>
+    <p style="align-self: center;">{{- current_mod.non_nexus_meta.description | safe -}}</p>
+    <br>
+  {% endif %}
+  <br>
+
+  <h2 style="align-self: center;">Download <a href="{{ mod_page_url }}">{{ title }}</a></h2>
+
+  <div class="join join-horizontal">
+    <select class="select join-item wide">
+      <option disabled selected>Select a modlist</option>
+      {% for list_name, list_data in current_mod.configurations %}
+        <option>{{ list_name }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" placeholder="Select an Installation Directory" class="input join-item wide" />
+  </div>
+
+  <div class="join join-horizontal">  
+    <div class="wide">
+      {% set category_url = get_url(path="/category/CATEGORY_NAME" | replace(from="CATEGORY_NAME", to=category | slugify) ) %}
+      <button class="btn btn-accent wide" title="Mod Category"><a href={{ category_url }}>{{ category }}</a></button>
+    </div>
+    {%- for tag in page.taxonomies.tags -%}
+      {% set tag_url = get_url(path="/tags/TAG_NAME" | replace(from="TAG_NAME", to=tag | slugify) ) %}
+      <div class="wide">
+        <button class="btn wide" title="Mod Tag"><a href={{ tag_url }}>{{ tag }}</a></button>
+      </div>
+    {%- endfor -%}
+
+  </div>
+
 </div>
 {% endblock %}
