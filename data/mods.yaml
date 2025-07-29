@@ -154,6 +154,7 @@ Total Conversions:
                   - Arktwend_English.esm
 
         Arktwend General Fixes:
+          version: "0.4.2"
           directories:
             - Arktwend_Fixes/Data Files:
                 depends:
@@ -164,6 +165,7 @@ Total Conversions:
                         - Arktwend_English.esm
 
         TAO compatibility patch:
+          version: "0.1"
           directories:
             - TAO:
                 depends:
@@ -200,12 +202,14 @@ Total Conversions:
     configurations:
       provides:
         Ver 1.1:
+          version: "V1.1"
           directories:
             - Arktwend Enhanced Textures:
                 depends:
                   - Arktwend/Data Files
 
         1.0 to 1.1 fix:
+          version: "1.1"
           directories:
             - water spray fix:
                 depends:

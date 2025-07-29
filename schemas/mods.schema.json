@@ -305,6 +305,10 @@
                           "type": "string",
                           "description": "If this field is present, it will be used in place of the archive name as the extraction directory. Useful for shortening long paths."
                         },
+                        "version": {
+                          "type": "string",
+                          "description": "The version of this specific archive, which may or may not be the same as the actual mod version in the case of mods with multiple archives. If the version field of an archive is not present, it is assumed to be the same as the top-level mod version."
+                        },
                         "duplicate": {
                           "type": "array",
                           "description": "This field is used in order to handle instances where one mod has two nexus archives by the same name. The file IDs and extraction paths must be provided.",
