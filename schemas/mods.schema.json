@@ -21,12 +21,62 @@
           "type": "object",
           "description": "Comprehensive definition of how a given mod interacts with the engine. It encompasses everything *except* sequencing, as this is meant to occur on a list-specific basis and/or be handled by LOOT.",
           "properties": {
-            "author": {
-              "type": "string",
-              "description": "Individual or team responsible for making this mod"
+            "non_nexus_meta": {
+              "type": "object",
+              "description": "Hardcoded metadata for mods which are not hosted on nexus and thus cannot necessarily have some information retrieved in an automated fashion.",
+              "properties": {
+                "author": {
+                  "type": "string",
+                  "description": "Individual or team responsible for making this mod"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The page from which a mod is served. Note that this is more for discovery purposes and is NOT the direct download url for a given archive."
+                }
+              },
+              "required": [
+                "author",
+                "description",
+                "url"
+              ]
             },
-            "description": {
-              "type": "string"
+            "localizations": {
+              "type": "object",
+              "description": "Map of country codes to localized versions of this mod. A special value of `Bundled` for the country code indicates that this is a Lua mod with baked-in support for a given language.",
+              "propertyNames": {
+                "enum": [
+                  "ar",
+                  "de",
+                  "en",
+                  "es",
+                  "fr",
+                  "it",
+                  "ja",
+                  "ko",
+                  "pl",
+                  "pt",
+                  "ru",
+                  "sv",
+                  "zh"
+                ]
+              },
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[^B].*|^B(?!undled$).*",
+                    "description": "Name of the mod that provides this localization"
+                  },
+                  {
+                    "const": "Bundled",
+                    "description": "Indicates the mod has built-in Lua localization for this language"
+                  }
+                ]
+              }
             },
             "nexus_mod_id": {
               "type": "integer",
@@ -67,10 +117,6 @@
                 ]
               },
               "uniqueItems": true
-            },
-            "url": {
-              "type": "string",
-              "format": "uri"
             },
             "version": {
               "type": "string"
@@ -583,8 +629,6 @@
           "allOf": [
             {
               "required": [
-                "author",
-                "description",
                 "version"
               ]
             },
@@ -592,7 +636,7 @@
               "oneOf": [
                 {
                   "required": [
-                    "url"
+                    "non_nexus_meta"
                   ]
                 },
                 {

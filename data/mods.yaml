@@ -1,12 +1,14 @@
 Decor:
   Mannequins for Sale:
     version: "1.31"
-    author: ManaUser
-    description: |-
-      Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
-      I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
-      Visit the shop in Caldera to get started. Now with wigs!
-    url: http://hostx.me/morrowind/#mannequins
+    non_nexus_meta:
+      author: ManaUser
+      description: |-
+        Portable mannequins which can be equipped with weapons and armor, and posed in about ten positions.
+        I know there are other mannequin mods, but I wasn't happy with any that I tried. If you feel the same way, give mine a try.
+        Visit the shop in Caldera to get started. Now with wigs!
+      url: http://hostx.me/morrowind/#mannequins
+
     tags:
       - Immersion
       - Utility
@@ -36,13 +38,8 @@ Decor:
 
 Gameplay:
   Weapon Refinement Lua:
-    author: Zusk
     nexus_mod_id: 54712
     version: "1.1"
-
-    description: |-
-      Adds a new mechanic to the game which allows improving the quality of one's own weapons by using armor benches acquired from vendors.
-      WRL also has support for Starwind!
 
     tags:
       - Gear
@@ -63,11 +60,10 @@ Gameplay:
 
 Music:
   S3maphore:
-    author: S3ctor
-    description: |-
-      Extensible music framework based upon OpenMW's built-in music script, with support for both Dynamic Music and MUSE modules.
+    localizations:
+      sv: Bundled
     nexus_mod_id: 56836
-    version: "0.54"
+    version: "0.51"
     configurations:
       provides:
         S3maphore Core:
@@ -133,11 +129,8 @@ Music:
 
 Total Conversions:
   Arktwend - OpenMW port:
-    author: SureAI
     nexus_mod_id: 45611
     version: "1.0"
-    description: |-
-      Port of the English version of the Arktwend total conversion to OpenMW.
 
     configurations:
       provides:
@@ -171,12 +164,9 @@ Total Conversions:
                         - Arktwend_English.esm
 
   Arktwend English Cutscenes:
-    author: Brumbek
     nexus_mod_id: 33639
     version: "1.0"
 
-    description: |-
-      English versions of the two cutscenes for Arktwend (with subtitles)
     configurations:
       provides:
         Arktwend_English_Cutscenes_1_0:
@@ -186,12 +176,9 @@ Total Conversions:
                   - "Arktwend/Data Files"
 
   Arktwend Enhanced Textures:
-    author: Lasergunner255
     nexus_mod_id: 54859
     version: "1.0"
 
-    description: |-
-      A Complete upscaled Texture pack for Arktwend encompassing every texture added or modified by arktwend during the installation.
     configurations:
       provides:
         Ver 1.1:
@@ -208,9 +195,6 @@ Total Conversions:
 
 Weapons:
   Improved Thrown Weapon Projectiles:
-    author: Reizeron
-    description: |-
-      Makes thrown weapon projectiles fly pointy end forward and, some of them, spin in the air.
     nexus_mod_id: 44763
     version: "1.0"
 
