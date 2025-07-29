@@ -88,6 +88,8 @@
                 "type": "string",
                 "enum": [
                   "Armor",
+                  "Arktwend",
+                  "Asset-Only Replacer",
                   "Bugfix",
                   "Creatures",
                   "Doors of Oblivion",
@@ -99,20 +101,38 @@
                   "Immersion",
                   "Interface",
                   "Lore-Friendly",
+                  "May Modathon 2020",
+                  "May Modathon 2021",
+                  "May Modathon 2022",
+                  "May Modathon 2023",
+                  "May Modathon 2024",
+                  "May Modathon 2025",
+                  "Mesh Replacer",
+                  "Modding Madness 2020",
+                  "Modding Madness 2021",
+                  "Modding Madness 2022",
+                  "Modding Madness 2023",
+                  "Modding Madness 2024",
+                  "Modding Madness 2025",
+                  "Music",
                   "New Mechanics",
                   "NPCs",
                   "OAAB",
                   "O.C.R.E",
+                  "OpenMW-Lua",
                   "Overhaul",
                   "Performance",
                   "Quest",
                   "Sound",
                   "Starwind",
                   "Tamriel Data",
+                  "Textures",
+                  "Upscale",
                   "Total Conversions",
                   "Translation",
                   "User Interface",
                   "Utility",
+                  "Video",
                   "Weapons"
                 ]
               },
@@ -423,7 +443,7 @@
                                       "type": "string",
                                       "description": "A single step in a tes3cmd chain, such as `delete` or `--exact-id`."
                                     },
-                                    "minItems": 2
+                                    "minItems": 4
                                   }
                                 },
                                 "required": [
@@ -629,6 +649,7 @@
           "allOf": [
             {
               "required": [
+                "tags",
                 "version"
               ]
             },

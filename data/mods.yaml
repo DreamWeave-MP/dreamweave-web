@@ -63,6 +63,10 @@ Music:
     localizations:
       sv: Bundled
     nexus_mod_id: 56836
+    tags:
+      - Immersion
+      - Music
+      - OpenMW-Lua
     version: "0.51"
     configurations:
       provides:
@@ -130,6 +134,10 @@ Music:
 Total Conversions:
   Arktwend - OpenMW port:
     nexus_mod_id: 45611
+    tags:
+      - Arktwend
+      - Total Conversions
+      - Translation
     version: "1.0"
 
     configurations:
@@ -165,6 +173,10 @@ Total Conversions:
 
   Arktwend English Cutscenes:
     nexus_mod_id: 33639
+    tags:
+      - Arktwend
+      - Translation
+      - Video
     version: "1.0"
 
     configurations:
@@ -177,6 +189,10 @@ Total Conversions:
 
   Arktwend Enhanced Textures:
     nexus_mod_id: 54859
+    tags:
+      - Asset-Only Replacer
+      - Textures
+      - Upscale
     version: "1.0"
 
     configurations:
@@ -196,6 +212,10 @@ Total Conversions:
 Weapons:
   Improved Thrown Weapon Projectiles:
     nexus_mod_id: 44763
+    tags:
+      - Asset-Only Replacer
+      - Mesh Replacer
+      - Weapons
     version: "1.0"
 
     configurations:
