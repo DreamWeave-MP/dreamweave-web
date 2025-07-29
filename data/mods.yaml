@@ -61,13 +61,14 @@ Gameplay:
 Music:
   S3maphore:
     localizations:
+      en: Bundled
       sv: Bundled
     nexus_mod_id: 56836
     tags:
       - Immersion
-      - Music
+      - May Modathon 2025
       - OpenMW-Lua
-    version: "0.51"
+    version: "0.54"
     configurations:
       provides:
         S3maphore Core:
