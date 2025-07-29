@@ -32,6 +32,10 @@
                 "description": {
                   "type": "string"
                 },
+                "picture_url": {
+                  "type": "string",
+                  "description": "Optional field which provides an image for the mod page"
+                },
                 "url": {
                   "type": "string",
                   "format": "uri",
@@ -143,6 +147,7 @@
                   "Weapons"
                 ]
               },
+              "minItems": 3,
               "uniqueItems": true
             },
             "version": {
