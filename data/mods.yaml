@@ -231,23 +231,13 @@ Weapons:
 
           actions:
             - copy:
-                - source: ITWP/Pathes/w_dart_ebony.nif
-                  dest: ITWP/Patches/Meshes/w/w_dart_ebony.nif
-
-                - source: ITWP/Patches/w_dart_steel.nif
-                  dest: ITWP/Patches/Meshes/w/w_dart_steel.nif
-
-                - source: ITWP/Patches/w_star_ebony.nif
-                  dest: ITWP/Patches/Meshes/w/w_star_ebony.nif
-
-                - source: ITWP/Patches/w_knife_iron.nif
-                  dest: ITWP/Patches/Meshes/w/w_knife_iron.nif
-
-                - source: ITWP/Patches/w_steel_knife.nif
-                  dest: ITWP/Patches/Meshes/w/w_steel_knife.nif
-
-                - source: ITWP/Patches/w_steel_star .nif
-                  dest: ITWP/Patches/Meshes/w/w_steel_star .nif
+                targets:
+                  ITWP/Pathes/w_dart_ebony.nif: ITWP/Patches/Meshes/w/w_dart_ebony.nif
+                  ITWP/Patches/w_dart_steel.nif: ITWP/Patches/Meshes/w/w_dart_steel.nif
+                  ITWP/Patches/w_star_ebony.nif: ITWP/Patches/Meshes/w/w_star_ebony.nif
+                  ITWP/Patches/w_knife_iron.nif: ITWP/Patches/Meshes/w/w_knife_iron.nif
+                  ITWP/Patches/w_steel_knife.nif: ITWP/Patches/Meshes/w/w_steel_knife.nif
+                  ITWP/Patches/w_steel_star .nif: ITWP/Patches/Meshes/w/w_steel_star .nif
 
           directories:
             - Data Files

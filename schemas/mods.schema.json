@@ -340,29 +340,30 @@
                               {
                                 "properties": {
                                   "copy": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "source": {
-                                          "type": "string"
-                                        },
-                                        "dest": {
-                                          "type": "string"
-                                        },
-                                        "lists": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
+                                    "type": "object",
+                                    "properties": {
+                                      "targets": {
+                                        "type": "object",
+                                        "patternProperties": {
+                                          "^.*$": {
+                                            "type": "string",
+                                            "description": "Mapping of source paths to destination paths"
                                           }
-                                        }
+                                        },
+                                        "additionalProperties": false,
+                                        "minProperties": 1
                                       },
-                                      "required": [
-                                        "source",
-                                        "dest"
-                                      ],
-                                      "additionalProperties": false
-                                    }
+                                      "lists": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "targets"
+                                    ],
+                                    "additionalProperties": false
                                   }
                                 },
                                 "required": [
