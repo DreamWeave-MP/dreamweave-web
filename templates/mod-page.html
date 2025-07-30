@@ -101,6 +101,47 @@
     <input type="text" placeholder="Select an Installation Directory" class="input join-item wide" />
   </div>
 
+{% for list_name, configuration_data in current_mod.configurations %}
+<div>
+  <code>
+          <br># For Modlist: {{ list_name }}
+          {% for archive_name, archive_data in configuration_data %}
+
+          {% set_global content_files = [] %}
+          {% set_global data_directories = [] %}
+
+            <br># Archive: {{ archive_name }}<br>
+            {% if archive_data.directories %}
+
+                {% for directory_configuration in archive_data.directories %}
+
+                  {% if directory_configuration is string -%}
+                    {{ data_directory(archive_data=archive_data, archive_name=archive_name) }}
+                  {% else %}
+
+                    {% for directory_name, directory_data in directory_configuration %}
+                      data={{ page.title }}/{% if archive_data.extract_to %}{{ archive_data.extract_to }}{% else %}{{ archive_name }}{% endif %}{% if directory_configuration != "." %}/{{ directory_name }}{% endif %}<br>
+
+                      {% if directory_data.content_files %}
+                        {% for content_file_name in directory_data.content_files %}
+                          {% set_global content_files = content_files | concat(with=content_file_name) %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+
+                  {% endif %}
+                {% endfor %}
+
+                {% for content_file_name in content_files %}
+                  content={{ content_file_name }}
+                {% endfor %}
+
+            {% endif %}
+          {% endfor %}
+      </code>
+</div>
+{% endfor %}
+
   <div class="join join-horizontal">  
     <div class="wide">
       {% set category_url = get_url(path="/category/CATEGORY_NAME" | replace(from="CATEGORY_NAME", to=category | slugify) ) %}
