@@ -379,11 +379,16 @@
                                     "items": {
                                       "type": "object",
                                       "properties": {
-                                        "from": {
-                                          "type": "string"
-                                        },
-                                        "to": {
-                                          "type": "string"
+                                        "targets": {
+                                          "type": "object",
+                                          "patternProperties": {
+                                            "^.*$": {
+                                              "type": "string",
+                                              "description": "Mapping of source paths to destination paths"
+                                            }
+                                          },
+                                          "additionalProperties": false,
+                                          "minProperties": 1
                                         },
                                         "lists": {
                                           "type": "array",
@@ -393,8 +398,7 @@
                                         }
                                       },
                                       "required": [
-                                        "from",
-                                        "to"
+                                        "targets"
                                       ],
                                       "additionalProperties": false
                                     }
