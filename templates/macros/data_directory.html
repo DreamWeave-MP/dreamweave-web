@@ -1,0 +1,15 @@
+{# Note that the page title is always used here as it is the map key in Mods.yaml #}
+{% set this_directory = page.title ~ "/" %}
+
+{% if archive_data.extract_to %}
+    {% set this_directory = this_directory ~ archive_data.extract_to %}
+{% else %}
+    {% set this_directory = this_directory ~ archive_name %}
+{% endif %}
+
+{% if directory_configuration != "." %}
+    {% set this_directory = this_directory ~ "/" ~ directory_configuration %}
+{% endif %}
+
+data={{ this_directory }}
+{% set_global data_directories = data_directories | concat(with=this_directory) %}
